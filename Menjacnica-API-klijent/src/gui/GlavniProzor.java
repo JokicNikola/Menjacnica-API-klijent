@@ -1,0 +1,132 @@
+package gui;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.GridLayout;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JSpinner;
+import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.JComboBox;
+
+public class GlavniProzor extends JFrame {
+
+	private JPanel contentPane;
+	private JButton btnNewButton;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
+	private JComboBox comboBox;
+	private JComboBox comboBox_1;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GlavniProzor frame = new GlavniProzor();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public GlavniProzor() {
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(getBtnNewButton());
+		contentPane.add(getTextField_2());
+		contentPane.add(getTextField_1_1());
+		contentPane.add(getLblNewLabel());
+		contentPane.add(getLblNewLabel_1());
+		contentPane.add(getLblNewLabel_2());
+		contentPane.add(getLblNewLabel_3());
+		contentPane.add(getComboBox());
+		contentPane.add(getComboBox_1());
+	}
+	private JButton getBtnNewButton() {
+		if (btnNewButton == null) {
+			btnNewButton = new JButton("New button");
+			btnNewButton.setBounds(162, 237, 89, 23);
+		}
+		return btnNewButton;
+	}
+	private JTextField getTextField_2() {
+		if (textField == null) {
+			textField = new JTextField();
+			textField.setBounds(53, 163, 86, 20);
+			textField.setColumns(10);
+		}
+		return textField;
+	}
+	private JTextField getTextField_1_1() {
+		if (textField_1 == null) {
+			textField_1 = new JTextField();
+			textField_1.setBounds(304, 163, 86, 20);
+			textField_1.setColumns(10);
+		}
+		return textField_1;
+	}
+	private JLabel getLblNewLabel() {
+		if (lblNewLabel == null) {
+			lblNewLabel = new JLabel("Iz valute zemlje\r\n");
+			lblNewLabel.setBounds(67, 42, 102, 14);
+		}
+		return lblNewLabel;
+	}
+	private JLabel getLblNewLabel_1() {
+		if (lblNewLabel_1 == null) {
+			lblNewLabel_1 = new JLabel("U valutu zemlje\r\n");
+			lblNewLabel_1.setBounds(304, 42, 86, 14);
+		}
+		return lblNewLabel_1;
+	}
+	private JLabel getLblNewLabel_2() {
+		if (lblNewLabel_2 == null) {
+			lblNewLabel_2 = new JLabel("Iznos\r\n");
+			lblNewLabel_2.setBounds(67, 138, 46, 14);
+		}
+		return lblNewLabel_2;
+	}
+	private JLabel getLblNewLabel_3() {
+		if (lblNewLabel_3 == null) {
+			lblNewLabel_3 = new JLabel("Iznos\r\n");
+			lblNewLabel_3.setBounds(328, 138, 46, 14);
+		}
+		return lblNewLabel_3;
+	}
+	private JComboBox getComboBox() {
+		if (comboBox == null) {
+			comboBox = new JComboBox();
+			comboBox.setBounds(85, 67, 28, 20);
+		}
+		return comboBox;
+	}
+	private JComboBox getComboBox_1() {
+		if (comboBox_1 == null) {
+			comboBox_1 = new JComboBox();
+			comboBox_1.setBounds(322, 67, 28, 20);
+		}
+		return comboBox_1;
+	}
+}
