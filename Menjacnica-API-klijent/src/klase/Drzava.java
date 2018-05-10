@@ -2,12 +2,8 @@ package klase;
 
 public class Drzava {
 	
-	private String alpha3;
-	private String currencyId;
-	private String currencyName;
-	private String currencySymbol;
-	private String id;
-	private String name;
+	private String alpha3, currencyId, currencyName, currencySymbol, id, name;
+	
 	
 	public String getAlpha3() {
 		return alpha3;
