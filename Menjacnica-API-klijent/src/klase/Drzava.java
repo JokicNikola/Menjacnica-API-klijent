@@ -43,8 +43,7 @@ public class Drzava {
 	}
 	
 	public String toString() {
-		return "Drzava [alpha3=" + alpha3 + ", currencyId=" + currencyId + ", currencyName=" + currencyName
-				+ ", currencySymbol=" + currencySymbol + ", id=" + id + ", name=" + name + "]";
+		return name;
 	}
 	
 	

@@ -8,12 +8,14 @@ import java.net.URL;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class SOUcitajValute {
 	
 	public static String url = "http://free.currencyconverterapi.com/api/v3/convert?q=";
 	
-	public static double ucitajValute(String valutaIz, String valutaU) throws Exception{
+	public static double ucitajValute(String valutaIz, String valutaU)throws Exception{
+		
 		
 		String sajt = url+valutaIz+ "_" +valutaU;
 		
@@ -33,13 +35,20 @@ public class SOUcitajValute {
 		}
 		r.close();
 		Gson gson = new GsonBuilder().create();
+		JsonParser parse = new JsonParser();
+		
 		
 		JsonObject konverzija = gson.fromJson(tekst, JsonObject.class);
 		if(konverzija.get("count").getAsInt()!=0) {
-			double k=konverzija.get("val").getAsDouble();
-			return k;
+			 double kurs=konverzija.get("val").getAsDouble();
+			return kurs;
 		
-		}else throw new RuntimeException("Ne postoji konvercija");
+		}
+		else 
+			throw new RuntimeException("Ne postoji konvercija");
+		
 	}
 	
+	
 }
+

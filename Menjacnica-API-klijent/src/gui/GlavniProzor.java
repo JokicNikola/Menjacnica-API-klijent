@@ -6,13 +6,22 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import gui.kontroler.GuiKontroler;
+import klase.Drzava;
+import klase.Menjacnica;
+
 import java.awt.GridLayout;
+import java.util.ArrayList;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GlavniProzor extends JFrame {
 
@@ -26,6 +35,7 @@ public class GlavniProzor extends JFrame {
 	private JLabel lblNewLabel_3;
 	private JComboBox comboBox;
 	private JComboBox comboBox_1;
+	private ArrayList<Drzava> drzave = new ArrayList<>();
 
 	/**
 	 * Launch the application.
@@ -35,7 +45,9 @@ public class GlavniProzor extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GlavniProzor() {
+	public GlavniProzor() throws Exception {
+		
+		drzave = Menjacnica.ucitajDrzave();
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -55,7 +67,23 @@ public class GlavniProzor extends JFrame {
 	}
 	private JButton getBtnNewButton() {
 		if (btnNewButton == null) {
-			btnNewButton = new JButton("New button");
+			btnNewButton = new JButton("Konvertuj");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					int prvi=comboBox.getSelectedIndex();
+					int drugi =comboBox_1.getSelectedIndex();
+					String drzava1 = drzave.get(prvi).getCurrencySymbol();
+					String drzava2 = drzave.get(drugi).getCurrencySymbol();
+					double iznos = Double.parseDouble(textField.getText());
+					try {
+						textField_1.setText(""+(iznos*Menjacnica.ucitajValute(drzava1, drzava2)));
+					} catch (Exception e) {
+						
+						e.printStackTrace();
+					}
+					
+				}
+			});
 			btnNewButton.setBounds(162, 237, 89, 23);
 		}
 		return btnNewButton;
@@ -106,15 +134,16 @@ public class GlavniProzor extends JFrame {
 	}
 	private JComboBox getComboBox() {
 		if (comboBox == null) {
-			comboBox = new JComboBox();
-			comboBox.setBounds(85, 67, 28, 20);
+			comboBox = new JComboBox(drzave.toArray());
+			
+			comboBox.setBounds(24, 67, 115, 20);
 		}
 		return comboBox;
 	}
 	private JComboBox getComboBox_1() {
 		if (comboBox_1 == null) {
-			comboBox_1 = new JComboBox();
-			comboBox_1.setBounds(322, 67, 28, 20);
+			comboBox_1 = new JComboBox(drzave.toArray());
+			comboBox_1.setBounds(248, 67, 126, 20);
 		}
 		return comboBox_1;
 	}
