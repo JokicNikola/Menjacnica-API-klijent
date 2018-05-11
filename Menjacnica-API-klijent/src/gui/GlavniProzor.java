@@ -7,12 +7,17 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+
 import gui.kontroler.GuiKontroler;
 import klase.Drzava;
 import klase.Menjacnica;
 
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -21,6 +26,10 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 
 public class GlavniProzor extends JFrame {
@@ -78,8 +87,26 @@ public class GlavniProzor extends JFrame {
 					
 					try {
 						//System.out.println(GuiKontroler.m.ucitajValute(drzava1, drzava2)+"");
-						String rezultat=iznos*GuiKontroler.m.ucitajValute(drzava1, drzava2)+"";
+						double kurs=GuiKontroler.m.ucitajValute(drzava1, drzava2);
+						String rezultat=iznos*kurs+"";
 						textField_1.setText(rezultat);
+						JsonObject j = new JsonObject();
+						
+						GregorianCalendar d = new GregorianCalendar();
+						
+						SimpleDateFormat dt = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss"); 
+						String datum2 = dt.format(d.getTime());
+						j.addProperty("datumVreme", datum2);
+						j.addProperty("izValute", drzava1);
+						j.addProperty("uValutu", drzava2);
+						j.addProperty("kurs", kurs);
+						try (FileWriter writer = new FileWriter("data/log.json")) {
+							Gson gson = new GsonBuilder().setPrettyPrinting().create();
+							gson.toJson(j,writer);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						
 					} catch (Exception e) {
 						
 						e.printStackTrace();
