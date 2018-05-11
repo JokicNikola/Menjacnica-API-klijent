@@ -34,13 +34,19 @@ public class SOUcitajValute {
 			else tekst=tekst+ucitaj;
 		}
 		r.close();
+		
+		
 		Gson gson = new GsonBuilder().create();
-		JsonParser parse = new JsonParser();
+		
 		
 		
 		JsonObject konverzija = gson.fromJson(tekst, JsonObject.class);
-		if(konverzija.get("count").getAsInt()!=0) {
-			 double kurs=konverzija.get("val").getAsDouble();
+		JsonObject query = konverzija.getAsJsonObject("query");
+		
+		if(query.get("count").getAsInt()!=0) {
+			JsonObject rezultat = konverzija.getAsJsonObject("results");
+			JsonObject valuta = rezultat.getAsJsonObject(valutaIz+"_"+valutaU);
+			 double kurs=valuta.get("val").getAsDouble();
 			return kurs;
 		
 		}

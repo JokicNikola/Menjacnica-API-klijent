@@ -6,7 +6,7 @@ import gui.GlavniProzor;
 import klase.Menjacnica;
 
 public class GuiKontroler {
-	Menjacnica m = new Menjacnica();
+	public static Menjacnica m = new Menjacnica();
 	
 	
 	public static void main(String[] args) {

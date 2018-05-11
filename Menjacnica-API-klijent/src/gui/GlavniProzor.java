@@ -47,7 +47,7 @@ public class GlavniProzor extends JFrame {
 	 */
 	public GlavniProzor() throws Exception {
 		
-		drzave = Menjacnica.ucitajDrzave();
+		drzave = GuiKontroler.m.ucitajDrzave();
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -72,11 +72,14 @@ public class GlavniProzor extends JFrame {
 				public void actionPerformed(ActionEvent arg0) {
 					int prvi=comboBox.getSelectedIndex();
 					int drugi =comboBox_1.getSelectedIndex();
-					String drzava1 = drzave.get(prvi).getCurrencySymbol();
-					String drzava2 = drzave.get(drugi).getCurrencySymbol();
+					String drzava1 = drzave.get(prvi).getCurrencyId();
+					String drzava2 = drzave.get(drugi).getCurrencyId();
 					double iznos = Double.parseDouble(textField.getText());
+					
 					try {
-						textField_1.setText(""+(iznos*Menjacnica.ucitajValute(drzava1, drzava2)));
+						//System.out.println(GuiKontroler.m.ucitajValute(drzava1, drzava2)+"");
+						String rezultat=iznos*GuiKontroler.m.ucitajValute(drzava1, drzava2)+"";
+						textField_1.setText(rezultat);
 					} catch (Exception e) {
 						
 						e.printStackTrace();

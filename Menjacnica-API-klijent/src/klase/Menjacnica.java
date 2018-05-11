@@ -9,12 +9,12 @@ public class Menjacnica {
 
 	
 	
-	public static ArrayList<Drzava> ucitajDrzave() throws Exception{
+	public ArrayList<Drzava> ucitajDrzave() throws Exception{
 		return SOUcitajDrzave.ucitajDrzave();
 	}
 	
-	public static double ucitajValute(String valutaIz, String valutaU) throws Exception{
+	public double ucitajValute(String valutaIz, String valutaU) throws Exception{
 		return SOUcitajValute.ucitajValute(valutaIz, valutaU);
-	}
+}
 	
 }

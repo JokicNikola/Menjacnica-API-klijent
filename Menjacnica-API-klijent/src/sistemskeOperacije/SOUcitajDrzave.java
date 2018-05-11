@@ -41,10 +41,10 @@ public class SOUcitajDrzave {
 			Gson gson= new GsonBuilder().create();
 			
 			JsonObject sadrzaj = gson.fromJson(tekst, JsonObject.class);
-			JsonObject drzave = sadrzaj.get("results").getAsJsonObject();
+			JsonObject drzave = sadrzaj.getAsJsonObject("results");
 			
 			for (java.util.Map.Entry<String, JsonElement> entry : drzave.entrySet()) {
-				Drzava drzava = gson.fromJson(entry.getValue().getAsJsonObject(), Drzava.class);
+				Drzava drzava = gson.fromJson(entry.getValue(), Drzava.class);
 				lista.add(drzava);
 			}
 			
