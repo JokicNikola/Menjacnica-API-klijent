@@ -8,6 +8,26 @@ import klase.Menjacnica;
 public class GuiKontroler {
 	public static Menjacnica m = new Menjacnica();
 	
+
+	
+	
+	public GuiKontroler(Menjacnica menjacnica) {
+		m = menjacnica;
+	}
+
+
+	public static Menjacnica getMenjacnica() {
+		return m;
+	}
+
+
+	public void setMenjacnica(Menjacnica menjacnica) {
+		m = menjacnica;
+	}
+
+
+	
+	
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

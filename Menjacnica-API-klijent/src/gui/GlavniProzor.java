@@ -14,6 +14,7 @@ import com.google.gson.JsonObject;
 import gui.kontroler.GuiKontroler;
 import klase.Drzava;
 import klase.Menjacnica;
+import sistemskeOperacije.SOUpisiJSON;
 
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.JSpinner;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
@@ -56,7 +58,7 @@ public class GlavniProzor extends JFrame {
 	 */
 	public GlavniProzor() throws Exception {
 		
-		drzave = GuiKontroler.m.ucitajDrzave();
+		drzave = GuiKontroler.getMenjacnica().ucitajDrzave();
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -83,33 +85,18 @@ public class GlavniProzor extends JFrame {
 					int drugi =comboBox_1.getSelectedIndex();
 					String drzava1 = drzave.get(prvi).getCurrencyId();
 					String drzava2 = drzave.get(drugi).getCurrencyId();
-					double iznos = Double.parseDouble(textField.getText());
+					
 					
 					try {
-						//System.out.println(GuiKontroler.m.ucitajValute(drzava1, drzava2)+"");
-						double kurs=GuiKontroler.m.ucitajValute(drzava1, drzava2);
-						String rezultat=iznos*kurs+"";
-						textField_1.setText(rezultat);
-						JsonObject j = new JsonObject();
+						double iznos = Double.parseDouble(textField.getText());
+						double rezultat=GuiKontroler.getMenjacnica().izracunaj(drzava1, drzava2, iznos);
+						textField_1.setText(rezultat+"");
+						GuiKontroler.getMenjacnica().upisiJSON(drzava1, drzava2, GuiKontroler.getMenjacnica().ucitajValute(drzava1, drzava2));
 						
-						GregorianCalendar d = new GregorianCalendar();
-						
-						SimpleDateFormat dt = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss"); 
-						String datum2 = dt.format(d.getTime());
-						j.addProperty("datumVreme", datum2);
-						j.addProperty("izValute", drzava1);
-						j.addProperty("uValutu", drzava2);
-						j.addProperty("kurs", kurs);
-						try (FileWriter writer = new FileWriter("data/log.json")) {
-							Gson gson = new GsonBuilder().setPrettyPrinting().create();
-							gson.toJson(j,writer);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
 						
 					} catch (Exception e) {
 						
-						e.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Morate uneti broj", "Greska", JOptionPane.ERROR_MESSAGE);
 					}
 					
 				}
